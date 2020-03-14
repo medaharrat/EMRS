@@ -42,13 +42,13 @@ def Seen(request):
     return render(request,'seen.html')  
 
 def HandlePicRequest(request):
-    face_classifier = cv2.CascadeClassifier("C:/Users/aharr/OneDrive/Bureau/emotion_detection-master/E-MRS/app/EMRS/haarcascade_frontalface_default.xml")
-    classifier = load_model("C:/Users/aharr/OneDrive/Bureau/emotion_detection-master/E-MRS/app/EMRS/Emotion_little_vgg.h5")
+    face_classifier = cv2.CascadeClassifier("./EMRS/haarcascade_frontalface_default.xml")
+    classifier = load_model("./EMRS/Emotion_little_vgg.h5")
     class_labels = ['Angry','Happy','Neutral','Sad','Surprise']
 
     labels = []
 
-    img = cv2.imread("C:/Users/aharr/OneDrive/Bureau/emotion_detection-master/E-MRS/app/EMRS/static/img/angry.jpg")
+    img = cv2.imread("./EMRS/static/img/face5.jpg")
     
     gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
     faces = face_classifier.detectMultiScale(gray,1.3,5)
