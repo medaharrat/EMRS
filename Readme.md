@@ -4,11 +4,11 @@
 In order to get the project to function in your machine, you either need to install all the libraries or to launch vs code from anaconda
 Librairies used 
 ```
-Tensorflow
-Keras
-Numpy
-OpenCV
-BeautifullSoup
+- Tensorflow
+- Keras
+- Numpy
+- OpenCV
+- BeautifullSoup
 ```
 
 ###### ***Notice : You might encounter a problem regarding the tensorflow, do please open tensorflow_backend.py file and comment lines #X, #Y and #Z ***:
