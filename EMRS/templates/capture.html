@@ -11,8 +11,11 @@
       <div style="margin-top: 100px;">
         <!-- CAMERA -->
         <div id="my_camera"></div>
-          <a class="btn btn-secondary-outline m-b-1" style="margin-top: 20px;" href="/confirm" role="button" onClick="take_snapshot()"></span>Take a picture</a>        
-      </div>
+            <form action="../confirm/" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+              <input type="text" value=""  id="save_picture" name="image" hidden> 
+              <input type="submit" value="Take a picture" class="btn btn-secondary-outline m-b-1" style="margin-top: 20px;" role="button" onClick="take_snapshot()"></span>     
+            </form>      </div>
     </div>
     </header>
 
@@ -39,11 +42,10 @@
         } );
       }
       /* SAVE SNAP */
-      function save_snap(base64, fileName) {
-        var link = document.createElement("a");
-        link.setAttribute("href", base64);
-        link.setAttribute("download", fileName);
-        link.click();
-      }
+        function save_snap(base64, fileName) {
+          var img = document.getElementById("save_picture");
+          img.setAttribute("value", base64);
+          
+        }
     </script>
 {% endblock %}

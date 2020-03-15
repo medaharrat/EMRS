@@ -9,6 +9,14 @@ import urllib.request
 from EMRS.models import Movie 
 from django.core.paginator import Paginator
 
+# Webcam Import 
+from django.views.decorators.csrf import csrf_exempt
+import base64
+from PIL import Image
+from django.views.decorators.csrf import ensure_csrf_cookie
+from io import BytesIO
+import re
+
 # Create your views here.
 
 def Home(request):  
@@ -49,14 +57,24 @@ def GetMatchGenre(mood):
         genre = 'Western'
     return genre
 
+@ensure_csrf_cookie
 def HandlePicRequest(request):
+    if request.POST:
+        
+        base64_data = re.sub('^data:image/.+;base64,', '', request.POST.get('image'))
+        byte_data = base64.b64decode(base64_data)
+        image_data = BytesIO(byte_data)
+        img = Image.open(image_data)
+        img.save("./EMRS/static/img/face.jpg")
+
+
     face_classifier = cv2.CascadeClassifier("./EMRS/haarcascade_frontalface_default.xml")
     classifier = load_model("./EMRS/Emotion_little_vgg.h5")
     class_labels = ['Angry','Happy','Neutral','Sad','Surprise']
 
     labels = []
 
-    img = cv2.imread("./EMRS/static/img/face.jpeg")
+    img = cv2.imread("./EMRS/static/img/face.jpg")
     
     gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
     faces = face_classifier.detectMultiScale(gray,1.3,5)
