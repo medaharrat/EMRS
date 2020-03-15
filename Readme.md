@@ -12,4 +12,4 @@ OpenCV
 BeautifullSoup
 ```
 
-___ Notice : You might encounter a problem regarding the tensorflow, do please open tensorflow_backend.py file and comment lines #X, #Y and #Z ___
+###### Notice : You might encounter a problem regarding the tensorflow, do please open tensorflow_backend.py file and comment lines #X, #Y and #Z
