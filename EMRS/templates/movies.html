@@ -120,17 +120,17 @@
     {% if movies %}
       <hr>
       <i>{{ movies|length }} movies were found.</i>
-      {% for movie in movies %}
+      {% for movie, info in movies.items %}
       <a href="#">
       <div class="movie-card">
         <div class="row">
           <div class="movie-bg col-lg-2">
-            <img src="https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_UX182_CR0,0,182,268_AL_.jpg"/>
+            <img src="{{info.image_url}}"/>
           </div>
           <div class="movie-info col-lg-8">
-            <h4>{{movie}}</h4>
-            <p>This is the description of the movie</p>
-            <span class="rating"><img src="https://img.icons8.com/emoji/48/000000/star-emoji.png"/> <b>7.5</b></span>
+            <h4>{{info.name}}</h4>
+            <p>{{info.description}}</p>
+            <span class="rating"><img src="https://img.icons8.com/emoji/48/000000/star-emoji.png"/> <b>{{info.rating}}</b></span>
           </div>
           <div class="movie-action col-lg-2">
             <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
