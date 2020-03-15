@@ -92,6 +92,19 @@ def HandlePicRequest(request):
             label=class_labels[preds.argmax()]
             label_position = (x,y)
 
+            # make a prediction on the ROI, then lookup the class
+
+            preds = classifier.predict(roi)[0]
+            label=class_labels[preds.argmax()]
+            label_position = (x,y)
+            cv2.putText(img,label,label_position,cv2.FONT_HERSHEY_SIMPLEX,2,(255,255,0),3)
+            cv2.imwrite('./EMRS/static/img/face.jpg', img) # Second image
+        else:
+            cv2.putText(img,'No Face Found',(20,60),cv2.FONT_HERSHEY_SIMPLEX,2,(0,255,0),3)
+    cv2.imshow('Emotion Detector',img)
+
+
+
     return render(request,'confirm.html', {'mood':label})
 
 #def showMovie(request, movie):        
