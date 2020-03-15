@@ -68,8 +68,8 @@ def HandlePicRequest(request):
         img.save("./EMRS/static/img/face.jpg")
 
 
-    face_classifier = cv2.CascadeClassifier("./EMRS/haarcascade_frontalface_default.xml")
-    classifier = load_model("./EMRS/Emotion_little_vgg.h5")
+    face_classifier = cv2.CascadeClassifier("./EMRS/static/haarcascade_frontalface_default.xml")
+    classifier = load_model("./EMRS/static/Emotion_little_vgg.h5")
     class_labels = ['Angry','Happy','Neutral','Sad','Surprise']
 
     labels = []
