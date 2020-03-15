@@ -1,18 +1,17 @@
 from django.shortcuts import render
-#Imports for the model
 from keras.models     import load_model
 from time             import sleep
 from keras.preprocessing.image import img_to_array
 from keras.preprocessing       import image
 import cv2
 import numpy as np
-
-# imports for WebScraping
 from bs4 import BeautifulSoup
 import urllib.request
-
+from EMRS.models import Movie 
+from django.core.paginator import Paginator
 
 # Create your views here.
+
 def Home(request):  
     return render(request,'index.html')  
 
@@ -21,41 +20,35 @@ def Capture(request):
 
 def GetMovies(request, mood):
     category = GetMatchGenre(mood)
-    movies = {}
+    movies = []
     filmCounter = 0
 
     # get the html page of every category
     html_page = urllib.request.urlopen("https://www.imdb.com/search/title/?title_type=tv_series,tv_miniseries&num_votes=5000,&genres={}&sort=user_rating,desc&start=1&ref_=adv_nxt".format(category))
     soup = BeautifulSoup(html_page, "lxml")
-
     # filling the movies into movie list
-    for img in zip(soup.findAll("img", class_="loadlate"),soup.findAll("div", class_="lister-item-content"), soup.findAll("span", class_="lister-item-year text-muted unbold"), soup.findAll("div", class_="inline-block ratings-imdb-rating"), soup.findAll("h3", class_="lister-item-header")):
-
-        movies[filmCounter] = {"name" : img[0]['alt'],"released_date" : img[2].text, "rating" : img[3].find("strong").text,"image_url" :img[0]['loadlate'], "description" : img[1].findChildren('p')[1].text, "url" : "https://www.imdb.com/"+img[4].findChildren('a')[0]['href']}
-
+    for data in zip(soup.findAll("img", class_="loadlate"),soup.findAll("div", class_="lister-item-content"), soup.findAll("span", class_="lister-item-year text-muted unbold"), soup.findAll("div", class_="inline-block ratings-imdb-rating"), soup.findAll("h3", class_="lister-item-header")):
+        movie = Movie(data[4].findChildren('a')[0]['href'].split("/")[2], data[0]['alt'], data[1].findChildren('p')[1].text, float(data[3].find("strong").text), data[0]['loadlate'], "https://www.imdb.com/"+data[4].findChildren('a')[0]['href'], data[2].text)
+        movies.append(movie)
         filmCounter += 1
-        
-        
+    paginator = Paginator(movies, 6)
+    page = request.GET.get('page')
+    movies = paginator.get_page(page)
+    return render(request,'movies.html', {'mood':mood, 'movies':movies, 'nbMovies': filmCounter, 'paginator': paginator})
 
-   # OUR SCRAPER GOES HERE
-
-    return render(request,'movies.html', {'mood':mood, 'movies':movies})
-
-def GetMatchGenre(emotion):
-    if(emotion == "Sad"): 
+def GetMatchGenre(mood):
+    emotion = mood.lower()
+    if(emotion == "sad"): 
         genre = 'Drama'
-    elif(emotion == "Happy"): 
+    elif(emotion == "happy"): 
         genre = 'Musical'
-    elif(emotion == "Angry"): 
+    elif(emotion == "angry"): 
         genre = 'Comedy'
-    elif(emotion == "Surprise"): 
+    elif(emotion == "surprise"): 
         genre = 'Fantasy'
-    elif(emotion == "Neutral"): 
+    elif(emotion == "neutral"): 
         genre = 'Western'
     return genre
-
-def Seen(request):
-    return render(request,'seen.html')  
 
 def HandlePicRequest(request):
     face_classifier = cv2.CascadeClassifier("./EMRS/haarcascade_frontalface_default.xml")
@@ -64,7 +57,7 @@ def HandlePicRequest(request):
 
     labels = []
 
-    img = cv2.imread("./EMRS/static/img/surprised.jpg")
+    img = cv2.imread("./EMRS/static/img/face.jpeg")
     
     gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
     faces = face_classifier.detectMultiScale(gray,1.3,5)
@@ -84,6 +77,5 @@ def HandlePicRequest(request):
 
     return render(request,'confirm.html', {'mood':label})
 
-
-
-
+#def showMovie(request, movie):        
+#   return render(request, "movie.html", {'movie': movie})

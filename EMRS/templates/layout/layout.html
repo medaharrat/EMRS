@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Moodify.io: Find a movie that suits your current mood</title>
+    <meta name="description" content="Find the perfect movie to fit your current mood" />
+    <meta name="keywords" content="movie, mood" />
+    <meta name="author" content="Moodify Inc" />
+    <meta name="msapplication-TileColor" content="#663fb5">
+    <meta name="msapplication-TileImage" content="/static/img/favicon/mstile-144x144.png">
+    <meta name="msapplication-config" content="/static/img/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#663fb5">
+    <link rel="icon" type="image/png" href="/static/img/favicon/favicon-96x96.png" sizes="96x96">
+    <link rel="stylesheet" href="/static/css/landio.css">
+    <link rel="stylesheet" href="/static/css/movies.css">
+  </head>
+  <body>
+
+    <!-- Navigation
+    ================================================== -->
+
+    <nav class="navbar navbar-dark bg-inverse bg-inverse-custom navbar-fixed-top" id="totop">
+      <div class="container">
+        <a class="navbar-brand" href="/">
+          <span><img src="../static/img/logo.png" style="height: 50px; width: 50px;" /></span>
+          <span class="sr-only">Moodify.io</span>
+        </a>
+        <a class="navbar-toggler hidden-md-up pull-xs-right" data-toggle="collapse" href="#collapsingNavbar" aria-expanded="false" aria-controls="collapsingNavbar">
+        &#9776;
+        </a>
+        <div id="collapsingNavbar" class="collapse navbar-toggleable-custom" role="tabpanel" aria-labelledby="collapsingNavbar">
+          <ul class="nav navbar-nav pull-xs-right">
+            <li class="nav-item nav-item-toggable">
+              <a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item nav-item-toggable">
+              <a class="nav-link" href="#" target="_blank">About</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Section
+    ================================================== -->
+
+    {% block content %} {% endblock %}
+
+    <!-- Footer
+    ================================================== -->
+
+    <footer class="section-footer bg-inverse" role="contentinfo">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-lg-5">
+            <div class="media">
+              <div class="media-left">
+              </div>
+              <small class="media-body media-bottom">
+                &copy; Moodify.io | 2020 <br>
+                Created with < 3 by Moodify team.
+              </small>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-7">
+            <ul class="nav nav-inline">
+              <li class="nav-item">
+                <a class="nav-link" href="./index-carousel.html">Home<span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item"><a class="nav-link" href="#" target="_blank">About</a></li>
+              <li class="nav-item"><a class="nav-link scroll-top" href="#totop">Back to top <span class="icon-caret-up"></span></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- jQuery JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <!-- Landio JS -->
+    <script src=".../static/js/landio.min.js"></script>  </body>
+</html>

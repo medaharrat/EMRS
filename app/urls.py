@@ -22,5 +22,5 @@ urlpatterns = [
     path('capture/', views.Capture),
     path('confirm/', views.HandlePicRequest),
     path('movies/<str:mood>', views.GetMovies),
-    path('seen/', views.Seen)
+    #path('movie/', views.showMovie)
 ]
