@@ -80,8 +80,8 @@ def HandlePicRequest(request):
     faces = face_classifier.detectMultiScale(gray,1.3,5)
 
     for (x,y,w,h) in faces:
-        cv2.rectangle(img,(x,y),(x+w,y+h),(255,0,0),2)
-        roi_gray = gray[y:y+h,x:x+w]
+        cv2.rectangle(img,(x,y),(x+w,y+h),(255,0,0),4)
+        roi_gray = gray[y:y+h+10,x:x+w+10]
         roi_gray = cv2.resize(roi_gray,(48,48),interpolation=cv2.INTER_AREA)
 
         if np.sum([roi_gray])!=0:
@@ -97,10 +97,8 @@ def HandlePicRequest(request):
             preds = classifier.predict(roi)[0]
             label=class_labels[preds.argmax()]
             label_position = (x,y)
-            cv2.putText(img,label,label_position,cv2.FONT_HERSHEY_SIMPLEX,2,(255,255,0),3)
-            cv2.imwrite('./EMRS/static/img/face.jpg', img) # Second image
-        else:
-            cv2.putText(img,'No Face Found',(20,60),cv2.FONT_HERSHEY_SIMPLEX,2,(0,255,0),3)
+           
+        cv2.imwrite('./EMRS/static/img/face.jpg', img) # Second image
     cv2.imshow('Emotion Detector',img)
 
 
