@@ -1,19 +1,13 @@
-<h1>Emotion-based Movie Recommendation System</h1>
-<small>This is just a school project, so it will be modified for better experience later.</small>
-<span class="badge success">School project</span>
-<span class="badge info">Python</span>
-<span class="badge info">Tensorflow</span>
-
-<style>
-.badge{
-    height: 5px; width: 20px;
-    border: 1px solid white;
-    border-radius: 5px;
-}
-.info{
-    background-color: blue;
-}
-.success{
-    background-color: green;
-}
-</style>
+# Emotion-based Movie Recommendation System
+###### This is just a school project, so it will be modified for better experience later.
+<hr>
+In order to get the project to fnuction in your machine, you either need to install all the libraries or to launch vs code from anaconda
+Librairies used 
+```
+Tensorflow
+Keras
+Numpy
+OpenCV
+BeautifullSoup
+```
+###### ***Notice : You might encounter a problem regarding the tensorflow, do please open tensorflow_backend.py file and comment lines #X, #Y and #Z ***:
