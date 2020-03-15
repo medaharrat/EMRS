@@ -29,9 +29,9 @@ def GetMovies(request, mood):
     soup = BeautifulSoup(html_page, "lxml")
 
     # filling the movies into movie list
-    for img in zip(soup.findAll("img", class_="loadlate"),soup.findAll("div", class_="lister-item-content"), soup.findAll("span", class_="lister-item-year text-muted unbold"), soup.findAll("div", class_="inline-block ratings-imdb-rating")):
+    for img in zip(soup.findAll("img", class_="loadlate"),soup.findAll("div", class_="lister-item-content"), soup.findAll("span", class_="lister-item-year text-muted unbold"), soup.findAll("div", class_="inline-block ratings-imdb-rating"), soup.findAll("h3", class_="lister-item-header")):
 
-        movies[filmCounter] = {"name" : img[0]['alt'],"released_date" : img[2].text, "rating" : img[3].find("strong").text,"image_url" :img[0]['loadlate'], "description" : img[1].findChildren('p')[1].text, }
+        movies[filmCounter] = {"name" : img[0]['alt'],"released_date" : img[2].text, "rating" : img[3].find("strong").text,"image_url" :img[0]['loadlate'], "description" : img[1].findChildren('p')[1].text, "url" : "https://www.imdb.com/"+img[4].findChildren('a')[0]['href']}
 
         filmCounter += 1
         
@@ -64,7 +64,7 @@ def HandlePicRequest(request):
 
     labels = []
 
-    img = cv2.imread("./EMRS/static/img/happy.jpg")
+    img = cv2.imread("./EMRS/static/img/surprised.jpg")
     
     gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
     faces = face_classifier.detectMultiScale(gray,1.3,5)
