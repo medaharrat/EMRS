@@ -11,6 +11,9 @@ This repository containts the deployed version of An EMRS using [Django](https:/
 ## Running Locally
 
 The libraries used are in requirement.txt.
+
+###### You need to launch MySQL before running your local server.
+
 ```sh
 $ git clone https://github.com/medaharrat/EMRS.git
 $ cd app
