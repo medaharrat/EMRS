@@ -12,7 +12,7 @@ This repository containts the deployed version of An EMRS using [Django](https:/
 
 The libraries used are in requirement.txt.
 ```sh
-$ git clone https://github.com/medaharrat/
+$ git clone https://github.com/medaharrat/EMRS.git
 $ cd app
 $ pip install -r requirements.txt
 $ py manage.py runserver
