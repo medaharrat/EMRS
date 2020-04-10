@@ -6,7 +6,7 @@ This repository containts the deployed version of An EMRS using [Django](https:/
 
 # The Used Model
 
-![](EMRS/static/img/model.png)
+![](EMRS/static/img/model.PNG)
 
 ## Running Locally
 
